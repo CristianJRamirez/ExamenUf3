@@ -1,0 +1,139 @@
+/**
+ * Created by 53638138e on 13/03/17.
+ */
+import org.basex.api.client.ClientQuery;
+import org.basex.api.client.ClientSession;
+import org.basex.core.cmd.CreateDB;
+
+/**
+ * This class demonstrates database access via the client/server architecture.
+ *
+ * @author BaseX Team 2005-17, BSD License
+ */
+
+
+/*Para empezar debes habrir en el terminal :/home/53638138e/Baixades/basex/bin == > basexhttp
+
+En el explorer = > http://localhost:8984/dba/databases
+
+Usuario : admin  Pasword : admin
+
+//Para crear una Base de datos nueva : => mira AddExample2.java 
+
+Si peta Importar Librerias : => xmldb y Base X 86
+
+*/
+
+public final class QueryMondial {
+    /**
+     * Runs the example code.
+     * @param args (ignored) command-line arguments
+     * @throws Exception exception
+     */
+    public static void main(final String... args) throws Exception {
+        System.out.println("=== ServerCommands ===");
+
+        // Start server on default port 1984
+        //BaseXServer server = new BaseXServer();
+
+        // Create a client session with host name, port, user name and password
+        System.out.println("\n* Create a client session.");
+
+        try(ClientSession session = new ClientSession("localhost", 1984, "admin", "admin")) {
+
+            // Create a database
+            System.out.println("\n* Create a database.");
+            //Aqui se cambia segun la base de datos
+            session.execute(new CreateDB("Mundial", "/home/53638138e/Baixades/mondial.xml"));
+
+            // Run a query
+            System.out.println("\n* Run a query:");
+
+            //Aqui se cambia la query
+            System.out.println("--------------------------");
+            System.out.println("INFORMACION DE ALEMANIA");
+            System.out.println("--------------------------");
+            try(ClientQuery query = session.query("//country[name = 'Germany']")) {
+                System.out.println(query.execute());
+            }
+
+            // Faster version: specify an output stream and run a query
+            System.out.println("\n* Run a query (faster):");
+
+
+            System.out.println("--------------------------");
+            System.out.println("LA POBLACION EN UGANDA :");
+            System.out.println("--------------------------");
+		//aqui va la consulta 
+            try(ClientQuery query = session.query("//country[name = 'Uganda']/population")) {
+                System.out.println(query.execute());
+                System.out.println();
+            }
+
+            session.setOutputStream(System.out);
+            session.setOutputStream(System.out);
+
+
+            // Reset output stream
+            session.setOutputStream(null);
+
+            // Run a query
+            System.out.println("\n\n* Run a buggy query: ");
+
+            System.out.println("--------------------------");
+            System.out.println("CIUDADES DE PERU :");
+            System.out.println("--------------------------");
+
+            try(ClientQuery query = session.query("//country[name = 'Peru']//city//name")) {
+                System.out.println(query.execute());
+                System.out.println();
+            }
+
+            // Drop the database
+            System.out.println("\n* Close and drop the database.");
+
+            //    session.execute(new DropDB("input"));
+
+            // Run a query
+            System.out.println("\n\n* Run a buggy query: ");
+
+            System.out.println("--------------------------");
+            System.out.println("POBLACION SHANGAY :");
+            System.out.println("--------------------------");
+
+            try(ClientQuery query = session.query("//country[name = 'China']//city[name ='Shanghai']/population")) {
+                System.out.println(query.execute());
+                System.out.println();
+            }
+
+            // Drop the database
+            System.out.println("\n* Close and drop the database.");
+
+            // Run a query
+            System.out.println("\n\n* Run a buggy query: ");
+
+            System.out.println("--------------------------");
+            System.out.println("LA MATRICULA DE CHIPRE:");
+            System.out.println("--------------------------");
+
+            try(ClientQuery query = session.query("//country[name = 'Cyprus']/@car_code")) {
+                System.out.println(query.execute());
+                System.out.println();
+            }
+
+            // Drop the database
+            System.out.println("\n* Close and drop the database.");
+
+            //    session.execute(new DropDB("input"));
+
+
+            //
+        }
+
+        // Stop the server
+        System.out.println("\n* Stop the server.");
+
+        //server.stop();
+    }
+}
+

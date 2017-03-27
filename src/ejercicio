@@ -1,0 +1,26 @@
+Treballarem en un recurs anomenat plant_catalog.xml que està en la màquina del
+professor i en un altra que el professor us indicarà per tal que no la satureu anant tots
+contra la mateixa. L'objectiu serà obtenir informació de l'estoc de plantes que tenim allí
+guardades. Feu en BaseX preferentment, i podeu emprar el fitxer BaseXClient.java que
+heu fet servir a classe.
+
+
+Pregunta 1 (4 punts) Feu una connexió per a realitzar consultes al recurs. Indiqueu el
+nom de la planta de la que tenim més estoc.
+
+
+Pregunta 2 (1 punt) Quantes plantes en total hi ha a l'estoc? (Per saber si ho heu fet bé,
+hi ha més d'un milió)
+
+
+Pregunta 3 (3 punts) Ens interessa saber el preu de tot l'estoc, planta per planta. Ha de
+sortir alguna cosa semblant al següent:
+
+
+Podeu emprar parsers, però no cal.
+Pregunta 4 (1 punt) Creeu una col·lecció dintre de la base de dades, que tingui el vostre
+cognom, només compost de lletres bàsiques del codi ASCII (res d'accents ni lletres
+rares).
+
+Pregunta 5 (1 punt) Afegiu un recurs a la col·lecció que heu creat. Feu una consulta en
+el nou recurs.
