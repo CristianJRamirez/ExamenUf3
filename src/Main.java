@@ -32,6 +32,7 @@ Si peta Importar Librerias : => xmldb y Base X 86
 
 public class Main {
 
+    public static String rutaxml = "/media/45858000w/PenCristianJ/M06/ExamenUf3/UF3-ExamenF-Plantes.xml";
     /**
      * Runs the example code.
      * @param args (ignored) command-line arguments
@@ -45,13 +46,13 @@ public class Main {
 
         // Create a client session with host name, port, user name and password
         System.out.println("\n* Create a client session.");
-/*
+
         try(ClientSession session = new ClientSession("localhost", 1984, "admin", "admin")) {
 
             // Create a database
             System.out.println("\n* Create a database.");
             //Aqui se cambia segun la base de datos
-            session.execute(new CreateDB("Plantes", "/media/45858000w/PenCristianJ/M06/ExamenUf3/UF3-ExamenF-Plantes.xml"));
+            session.execute(new CreateDB("Plantes", rutaxml));
 
             //Aqui se cambia la query
             System.out.println("--------------------------");
@@ -95,7 +96,7 @@ public class Main {
         System.out.println("\n* Stop the server.");
 
         //server.stop();
-*/
+
         afegirFitxer();
     }
 
@@ -104,7 +105,7 @@ public class Main {
 
     private static void afegirFitxer() throws XMLDBException,
             ClassNotFoundException, IllegalAccessException, InstantiationException{
-        File f = new File("UF3-ExamenF-Plantes.xml");
+        File f = new File(rutaxml);
 
         // initialize database driver
         Class cl = Class.forName(driver);
@@ -121,7 +122,7 @@ public class Main {
         //Creem la col·lecció on guardarem el recurs
         CollectionManagementService colmgt = (CollectionManagementService) col.getService("CollectionManagementService", "1.0");
         //l'hi donem un nom a la nova col·lecció
-        col = colmgt.createCollection("CristianJavier[PACO]");
+        col = colmgt.createCollection("CristianJavierPACO");
 
         //afegir el recurs que farem servir
         Resource res = col.createResource("UF3-ExamenF-Plantes.xml","XMLResource");
